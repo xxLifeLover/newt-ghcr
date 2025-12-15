@@ -23,4 +23,4 @@ jobs:
         run: |
           skopeo copy --all \
             docker://nicklashansen/newt:1.0.0 \
-            docker://ghcr.io/xxLifeLover/newt:1.0.0
+            docker://ghcr.io/xxlifelover/newt:1.0.0
