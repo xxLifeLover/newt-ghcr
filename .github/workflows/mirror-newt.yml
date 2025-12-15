@@ -1,0 +1,27 @@
+name: Mirror Newt image to GHCR
+
+on:
+  workflow_dispatch:
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull from Docker Hub
+        run: |
+          docker pull nicklashansen/newt:1.0.0
+
+      - name: Tag and push to GHCR
+        run: |
+          docker tag nicklashansen/newt:1.0.0 ghcr.io/<YOUR_GH_USERNAME>/newt:1.0.0
+          docker push ghcr.io/xxLifeLover/newt:1.0.0
